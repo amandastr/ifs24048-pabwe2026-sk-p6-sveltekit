@@ -21,6 +21,13 @@ export default defineConfig(({ mode }) => {
         },
       });
 
+  // Alamat API: dari VITE_DELCOM_BASEURL (.env atau environment Vercel),
+  // bila kosong memakai API Delcom publik agar aplikasi tetap berjalan.
+  const baseUrl =
+    process.env.VITE_DELCOM_BASEURL ||
+    env.VITE_DELCOM_BASEURL ||
+    "https://open-api.delcom.org/api/v1";
+
   return {
     plugins: [
       sveltekit({ adapter }),
@@ -37,9 +44,7 @@ export default defineConfig(({ mode }) => {
       chunkSizeWarningLimit: 1500,
     },
     define: {
-      DELCOM_BASEURL: JSON.stringify(
-        env.VITE_DELCOM_BASEURL || "http://localhost:8000/api/v1"
-      ),
+      DELCOM_BASEURL: JSON.stringify(baseUrl),
     },
     test: {
       globals: true,
