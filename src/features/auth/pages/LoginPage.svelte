@@ -62,6 +62,8 @@
       />
       <input
         type="email"
+        name="email"
+        autocomplete="email"
         id="login-email-input"
         data-testid="login-email-input"
         bind:value={email}
@@ -83,6 +85,8 @@
       />
       <input
         type="password"
+        name="password"
+        autocomplete="current-password"
         id="login-password-input"
         data-testid="login-password-input"
         bind:value={password}
