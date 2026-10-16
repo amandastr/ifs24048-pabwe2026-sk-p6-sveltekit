@@ -78,7 +78,7 @@
           type="button"
           data-testid="close-cover-modal-btn"
           on:click={handleClose}
-          class="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
+          class="p-1.5 rounded-lg text-slate-600 hover:text-slate-600 hover:bg-slate-100 transition-colors"
         >
           <X size={18} />
         </button>
@@ -96,7 +96,7 @@
                   <Upload size={20} />
                 </div>
                 <p class="text-sm font-semibold text-slate-700">Klik untuk memilih gambar</p>
-                <p class="text-xs text-slate-500 mt-1">PNG, JPG, JPEG (Maks. 1MB)</p>
+                <p class="text-xs text-slate-600 mt-1">PNG, JPG, JPEG (Maks. 1MB)</p>
               </div>
             {/if}
             <input

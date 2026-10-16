@@ -105,7 +105,7 @@
 
       <div class="p-6 sm:p-8 space-y-5">
         <div class="space-y-1">
-          <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">
+          <p class="text-xs font-semibold uppercase tracking-wider text-slate-600">
             {course?.title || "Materi Kursus"}
           </p>
           <h1 class="text-2xl font-extrabold text-slate-900 tracking-tight">{content.title}</h1>
@@ -115,7 +115,7 @@
           <div class="flex flex-wrap items-center gap-3">
             <span
               data-testid="status-badge"
-              class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border {isFinished ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-slate-50 text-slate-500 border-slate-200'}"
+              class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border {isFinished ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-slate-50 text-slate-600 border-slate-200'}"
             >
               {#if isFinished}
                 <CircleCheck size={14} /> Selesai
@@ -133,11 +133,11 @@
             </button>
           </div>
         {:else if role === "owner"}
-          <p data-testid="owner-note" class="text-sm text-slate-500">
+          <p data-testid="owner-note" class="text-sm text-slate-600">
             Anda adalah pemilik kursus ini. Status belajar hanya dapat diubah oleh peserta.
           </p>
         {:else}
-          <p data-testid="guest-note" class="text-sm text-slate-500">
+          <p data-testid="guest-note" class="text-sm text-slate-600">
             Daftar pada kursus ini untuk menandai materi sebagai selesai.
           </p>
         {/if}

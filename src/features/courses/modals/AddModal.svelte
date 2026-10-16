@@ -58,14 +58,14 @@
           </div>
           <div>
             <h3 class="text-base font-bold text-slate-800">Tambah Kursus Baru</h3>
-            <p class="text-xs text-slate-500">Isi judul dan deskripsi kursus. Sampul dapat diunggah setelahnya.</p>
+            <p class="text-xs text-slate-600">Isi judul dan deskripsi kursus. Sampul dapat diunggah setelahnya.</p>
           </div>
         </div>
         <button
           type="button"
           data-testid="close-add-modal-btn"
           on:click={handleClose}
-          class="p-2 rounded-xl text-slate-400 hover:text-slate-600 hover:bg-slate-200/60 transition-colors"
+          class="p-2 rounded-xl text-slate-600 hover:text-slate-600 hover:bg-slate-200/60 transition-colors"
         >
           <X size={20} />
         </button>
@@ -82,7 +82,7 @@
             data-testid="add-course-title-input"
             bind:value={title}
             placeholder="Contoh: Belajar ReactJS dari Nol"
-            class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all text-sm shadow-xs"
+            class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-800 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all text-sm shadow-xs"
           />
         </div>
 
@@ -96,7 +96,7 @@
             bind:value={description}
             rows="5"
             placeholder="Jelaskan apa yang akan dipelajari pada kursus ini..."
-            class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all text-sm shadow-xs resize-none"
+            class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-800 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all text-sm shadow-xs resize-none"
           ></textarea>
         </div>
 

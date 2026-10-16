@@ -98,7 +98,7 @@
         <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
           Daftar Kursus
         </h1>
-        <p class="text-sm text-slate-500 mt-1">
+        <p class="text-sm text-slate-600 mt-1">
           Temukan kursus, ikuti materinya, dan pantau progres belajar Anda.
         </p>
       </div>
@@ -129,18 +129,18 @@
     <!-- Pencarian & filter -->
     <div class="bg-white rounded-2xl border border-slate-200/80 shadow-xs p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
       <div class="relative flex-1 max-w-md">
-        <Search size={18} class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+        <Search size={18} class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-600" />
         <input
           type="text"
           data-testid="search-course-input"
           bind:value={searchQuery}
           placeholder="Cari judul, deskripsi, atau pengajar..."
-          class="w-full pl-10 pr-4 py-2 text-sm rounded-xl border border-slate-200 bg-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all"
+          class="w-full pl-10 pr-4 py-2 text-sm rounded-xl border border-slate-200 bg-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all"
         />
       </div>
 
       <div class="flex items-center gap-2.5">
-        <span class="text-xs font-semibold text-slate-500 uppercase tracking-wide flex items-center gap-1.5">
+        <span class="text-xs font-semibold text-slate-600 uppercase tracking-wide flex items-center gap-1.5">
           <Funnel size={16} /> Filter:
         </span>
         <div class="inline-flex rounded-xl bg-slate-100 p-1 text-xs font-semibold text-slate-600">
@@ -166,12 +166,12 @@
 
     <!-- Daftar kursus -->
     {#if loadingCourses && filteredCourses.length === 0}
-      <div class="bg-white rounded-2xl border border-slate-200/80 px-6 py-16 text-center text-slate-400">
+      <div class="bg-white rounded-2xl border border-slate-200/80 px-6 py-16 text-center text-slate-600">
         <LoaderCircle size={36} class="mx-auto text-indigo-600 animate-spin mb-2" />
         <p class="font-medium text-slate-600">Memuat daftar kursus...</p>
       </div>
     {:else if filteredCourses.length === 0}
-      <div class="bg-white rounded-2xl border border-slate-200/80 px-6 py-16 text-center text-slate-400">
+      <div class="bg-white rounded-2xl border border-slate-200/80 px-6 py-16 text-center text-slate-600">
         <GraduationCap size={40} class="mx-auto text-slate-300 mb-2" />
         <p class="font-medium">Belum ada kursus yang cocok.</p>
       </div>
@@ -202,24 +202,24 @@
 
             <div class="p-5 flex-1 flex flex-col gap-3">
               <div>
-                <h3 class="font-bold text-slate-900 leading-snug line-clamp-2">{course.title}</h3>
+                <h2 class="font-bold text-slate-900 leading-snug line-clamp-2">{course.title}</h2>
                 {#if course.description}
-                  <p class="text-xs text-slate-500 line-clamp-2 mt-1">{course.description}</p>
+                  <p class="text-xs text-slate-600 line-clamp-2 mt-1">{course.description}</p>
                 {/if}
               </div>
 
-              <p class="text-xs text-slate-400">
+              <p class="text-xs text-slate-600">
                 Oleh <span class="font-semibold text-slate-600">{course.author?.name || "-"}</span>
               </p>
 
-              <div class="flex items-center gap-4 text-xs text-slate-500 mt-auto">
+              <div class="flex items-center gap-4 text-xs text-slate-600 mt-auto">
                 <span class="inline-flex items-center gap-1.5">
                   <Video size={14} /> {course.total_contents || 0} materi
                 </span>
                 <span class="inline-flex items-center gap-1.5">
                   <Users size={14} /> {(course.students || []).length} peserta
                 </span>
-                <span class="inline-flex items-center gap-1.5 text-amber-600 font-semibold">
+                <span class="inline-flex items-center gap-1.5 text-amber-700 font-semibold">
                   <Star size={14} /> {formatRating(course.avg_ratings)}
                 </span>
               </div>
@@ -239,7 +239,7 @@
                     type="button"
                     data-testid={`edit-course-${course.id}`}
                     on:click={() => handleEditCourse(course.id)}
-                    class="p-1.5 text-slate-600 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-colors"
+                    class="p-1.5 text-slate-600 hover:text-amber-700 hover:bg-amber-50 rounded-lg transition-colors"
                     title="Ubah Kursus"
                   >
                     <Pencil size={18} />

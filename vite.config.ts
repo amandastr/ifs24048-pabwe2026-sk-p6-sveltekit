@@ -30,7 +30,11 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [
-      sveltekit({ adapter }),
+      sveltekit({
+        adapter,
+        // Inline semua CSS ke <head> agar tidak ada file CSS yang memblokir render
+        inlineStyleThreshold: Infinity,
+      }),
       tailwindcss(),
       svelteTesting(),
     ],

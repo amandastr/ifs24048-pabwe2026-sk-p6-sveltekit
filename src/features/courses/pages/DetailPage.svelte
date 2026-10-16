@@ -221,7 +221,7 @@
       <div class="p-6 sm:p-8 space-y-6">
         <div class="space-y-3">
           <div class="flex flex-wrap items-center gap-2">
-            <span class="font-mono text-xs font-bold text-slate-400">{`#${course.id}`}</span>
+            <span class="font-mono text-xs font-bold text-slate-600">{`#${course.id}`}</span>
             {#if role === "owner"}
               <span data-testid="role-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-50 text-indigo-700 border border-indigo-200">
                 Pemilik Kursus
@@ -237,7 +237,7 @@
             {course.title}
           </h1>
 
-          <div class="flex flex-wrap items-center gap-x-5 gap-y-1 text-xs text-slate-400">
+          <div class="flex flex-wrap items-center gap-x-5 gap-y-1 text-xs text-slate-600">
             <span>Pengajar: <strong class="text-slate-600">{course.author?.name || "-"}</strong></span>
             <span class="inline-flex items-center gap-1.5">
               <Users size={14} />
@@ -247,20 +247,20 @@
               <Video size={14} />
               <strong class="text-slate-600">{course.total_contents ?? contents.length}</strong> materi
             </span>
-            <span class="inline-flex items-center gap-1.5 text-amber-600">
+            <span class="inline-flex items-center gap-1.5 text-amber-700">
               <Star size={14} />
               <strong>{formatRating(course.avg_ratings)}</strong>
             </span>
           </div>
 
-          <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-400">
+          <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-slate-600">
             <div class="flex items-center gap-1.5">
               <Calendar size={14} class="shrink-0" />
-              <span>Dibuat: <strong class="text-slate-500">{formatDate(course.created_at)}</strong></span>
+              <span>Dibuat: <strong class="text-slate-600">{formatDate(course.created_at)}</strong></span>
             </div>
             <div class="flex items-center gap-1.5">
               <Calendar size={14} class="shrink-0" />
-              <span>Diperbarui: <strong class="text-slate-500">{formatDate(course.updated_at)}</strong></span>
+              <span>Diperbarui: <strong class="text-slate-600">{formatDate(course.updated_at)}</strong></span>
             </div>
           </div>
         </div>
@@ -272,7 +272,7 @@
           {#if course.description}
             {course.description}
           {:else}
-            <p class="italic text-slate-400">Tidak ada deskripsi untuk kursus ini.</p>
+            <p class="italic text-slate-600">Tidak ada deskripsi untuk kursus ini.</p>
           {/if}
         </div>
 
@@ -280,7 +280,7 @@
         {#if role === "student"}
           <div class="space-y-3">
             <div>
-              <div class="flex items-center justify-between text-xs font-semibold text-slate-500 mb-1.5">
+              <div class="flex items-center justify-between text-xs font-semibold text-slate-600 mb-1.5">
                 <span>Progres belajar Anda</span>
                 <span data-testid="progress-label">{progress.toFixed(0)}%</span>
               </div>
@@ -330,7 +330,7 @@
       </div>
 
       {#if contents.length === 0}
-        <div class="px-6 py-12 text-center text-slate-400">
+        <div class="px-6 py-12 text-center text-slate-600">
           <Video size={36} class="mx-auto text-slate-300 mb-2" />
           <p class="font-medium">Belum ada materi pada kursus ini.</p>
         </div>
@@ -346,7 +346,7 @@
                   {`${index + 1}. ${content.title}`}
                 </p>
                 {#if role === "student"}
-                  <p class="text-xs mt-0.5 inline-flex items-center gap-1 {content.my_status_finished ? 'text-emerald-600' : 'text-slate-400'}">
+                  <p class="text-xs mt-0.5 inline-flex items-center gap-1 {content.my_status_finished ? 'text-emerald-700' : 'text-slate-600'}">
                     {#if content.my_status_finished}
                       <CircleCheck size={13} /> Selesai
                     {:else}
@@ -358,7 +358,7 @@
 
               <div class="flex items-center gap-1.5">
                 {#if role === "guest"}
-                  <span data-testid={`locked-content-${content.id}`} class="p-1.5 text-slate-400" title="Daftar kursus untuk membuka materi">
+                  <span data-testid={`locked-content-${content.id}`} class="p-1.5 text-slate-600" title="Daftar kursus untuk membuka materi">
                     <Lock size={18} />
                   </span>
                 {:else}
@@ -377,7 +377,7 @@
                     type="button"
                     data-testid={`edit-content-${content.id}`}
                     on:click={() => handleEditContent(content)}
-                    class="p-1.5 text-slate-600 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-colors"
+                    class="p-1.5 text-slate-600 hover:text-amber-700 hover:bg-amber-50 rounded-lg transition-colors"
                     title="Ubah Konten"
                   >
                     <Pencil size={18} />
@@ -434,7 +434,7 @@
                 aria-label="Komentar"
                 bind:value={ratingComment}
                 placeholder="Tulis komentar Anda..."
-                class="sm:col-span-3 px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-800 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600"
+                class="sm:col-span-3 px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-800 placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600"
               />
             </div>
             <button
@@ -449,7 +449,7 @@
         {/if}
 
         {#if ratings.length === 0}
-          <p class="text-sm text-slate-400 text-center">Belum ada rating untuk kursus ini.</p>
+          <p class="text-sm text-slate-600 text-center">Belum ada rating untuk kursus ini.</p>
         {:else}
           <ul class="space-y-4">
             {#each ratings as rating, index (index)}

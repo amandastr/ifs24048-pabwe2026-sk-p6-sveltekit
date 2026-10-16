@@ -77,14 +77,14 @@
           </div>
           <div>
             <h3 class="text-base font-bold text-slate-800">Ubah Data Kursus</h3>
-            <p class="text-xs text-slate-500">Perbarui judul dan deskripsi kursus</p>
+            <p class="text-xs text-slate-600">Perbarui judul dan deskripsi kursus</p>
           </div>
         </div>
         <button
           type="button"
           data-testid="close-edit-modal-btn"
           on:click={handleClose}
-          class="p-2 rounded-xl text-slate-400 hover:text-slate-600 hover:bg-slate-200/60 transition-colors"
+          class="p-2 rounded-xl text-slate-600 hover:text-slate-600 hover:bg-slate-200/60 transition-colors"
         >
           <X size={20} />
         </button>
@@ -93,7 +93,7 @@
       <form on:submit|preventDefault={handleSave} class="p-6 space-y-4">
         {#if fetchingCourse}
           <div class="flex items-center justify-center py-12">
-            <LoaderCircle size={32} class="animate-spin text-amber-600" />
+            <LoaderCircle size={32} class="animate-spin text-amber-700" />
           </div>
         {:else}
           <div>
