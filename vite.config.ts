@@ -45,7 +45,10 @@ export default defineConfig(({ mode }) => {
       chunkSizeWarningLimit: 1500,
     },
     define: {
-      DELCOM_BASEURL: JSON.stringify(baseUrl),
+      // Browser memanggil proxy server aplikasi ini (/api/delcom),
+      // lalu server meneruskan ke API Delcom (DELCOM_UPSTREAM).
+      DELCOM_BASEURL: JSON.stringify("/api/delcom"),
+      DELCOM_UPSTREAM: JSON.stringify(baseUrl),
     },
     test: {
       globals: true,
