@@ -27,7 +27,7 @@
     <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">
       Delcom Courses
     </h1>
-    <p class="mt-1 text-sm text-slate-600">
+    <p class="mt-1 text-sm text-slate-500">
       Platform Belajar Online: Ikuti Kursus, Tonton Materi, dan Pantau Progres Belajarmu
     </p>
   </div>

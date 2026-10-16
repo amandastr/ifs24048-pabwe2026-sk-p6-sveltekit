@@ -58,12 +58,10 @@
     <div class="relative">
       <Mail
         size={18}
-        class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-600"
+        class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500"
       />
       <input
         type="email"
-        name="email"
-        autocomplete="email"
         id="login-email-input"
         data-testid="login-email-input"
         bind:value={email}
@@ -81,12 +79,10 @@
     <div class="relative">
       <Lock
         size={18}
-        class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-600"
+        class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500"
       />
       <input
         type="password"
-        name="password"
-        autocomplete="current-password"
         id="login-password-input"
         data-testid="login-password-input"
         bind:value={password}

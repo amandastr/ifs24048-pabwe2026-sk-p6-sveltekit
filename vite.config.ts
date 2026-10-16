@@ -30,11 +30,8 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [
-      sveltekit({
-        adapter,
-        // Inline semua CSS ke <head> agar tidak ada file CSS yang memblokir render
-        inlineStyleThreshold: Infinity,
-      }),
+      // CSS (~46 KB) disisipkan langsung ke HTML agar tidak memblokir render.
+      sveltekit({ adapter, inlineStyleThreshold: 100000 }),
       tailwindcss(),
       svelteTesting(),
     ],

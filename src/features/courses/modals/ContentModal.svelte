@@ -89,14 +89,14 @@
             <h3 class="text-base font-bold text-slate-800">
               {isEdit ? "Ubah Konten" : "Tambah Konten"}
             </h3>
-            <p class="text-xs text-slate-600">Materi berupa tautan video YouTube</p>
+            <p class="text-xs text-slate-500">Materi berupa tautan video YouTube</p>
           </div>
         </div>
         <button
           type="button"
           data-testid="close-content-modal-btn"
           on:click={handleClose}
-          class="p-2 rounded-xl text-slate-600 hover:text-slate-600 hover:bg-slate-200/60 transition-colors"
+          class="p-2 rounded-xl text-slate-500 hover:text-slate-600 hover:bg-slate-200/60 transition-colors"
         >
           <X size={20} />
         </button>
@@ -105,7 +105,7 @@
       <form on:submit|preventDefault={handleSave} class="p-6 space-y-4">
         <div>
           <label for="content-title-input" class="block text-sm font-semibold text-slate-700 mb-1.5">
-            Judul Materi <span class="text-red-500">*</span>
+            Judul Materi <span class="text-red-600">*</span>
           </label>
           <input
             id="content-title-input"
@@ -113,13 +113,13 @@
             data-testid="content-title-input"
             bind:value={title}
             placeholder="Contoh: Pengenalan Variabel"
-            class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-800 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all text-sm shadow-xs"
+            class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all text-sm shadow-xs"
           />
         </div>
 
         <div>
           <label for="content-youtube-input" class="block text-sm font-semibold text-slate-700 mb-1.5">
-            Tautan YouTube <span class="text-red-500">*</span>
+            Tautan YouTube <span class="text-red-600">*</span>
           </label>
           <input
             id="content-youtube-input"
@@ -127,7 +127,7 @@
             data-testid="content-youtube-input"
             bind:value={youtube}
             placeholder="https://youtu.be/uHyfQV0kbgo"
-            class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-800 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all text-sm shadow-xs"
+            class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all text-sm shadow-xs"
           />
         </div>
 

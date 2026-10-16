@@ -77,14 +77,14 @@
           </div>
           <div>
             <h3 class="text-base font-bold text-slate-800">Ubah Data Kursus</h3>
-            <p class="text-xs text-slate-600">Perbarui judul dan deskripsi kursus</p>
+            <p class="text-xs text-slate-500">Perbarui judul dan deskripsi kursus</p>
           </div>
         </div>
         <button
           type="button"
           data-testid="close-edit-modal-btn"
           on:click={handleClose}
-          class="p-2 rounded-xl text-slate-600 hover:text-slate-600 hover:bg-slate-200/60 transition-colors"
+          class="p-2 rounded-xl text-slate-500 hover:text-slate-600 hover:bg-slate-200/60 transition-colors"
         >
           <X size={20} />
         </button>
@@ -98,7 +98,7 @@
         {:else}
           <div>
             <label for="edit-course-title-input" class="block text-sm font-semibold text-slate-700 mb-1.5">
-              Judul Kursus <span class="text-red-500">*</span>
+              Judul Kursus <span class="text-red-600">*</span>
             </label>
             <input
               id="edit-course-title-input"
@@ -111,7 +111,7 @@
 
           <div>
             <label for="edit-course-description-input" class="block text-sm font-semibold text-slate-700 mb-1.5">
-              Deskripsi <span class="text-red-500">*</span>
+              Deskripsi <span class="text-red-600">*</span>
             </label>
             <textarea
               id="edit-course-description-input"
@@ -137,7 +137,7 @@
             type="submit"
             data-testid="submit-edit-modal-btn"
             disabled={loading || fetchingCourse}
-            class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-amber-600 hover:bg-amber-700 active:bg-amber-800 rounded-xl shadow-md shadow-amber-600/25 transition-all disabled:opacity-60"
+            class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-amber-700 hover:bg-amber-800 active:bg-amber-900 rounded-xl shadow-md shadow-amber-600/25 transition-all disabled:opacity-60"
           >
             {#if loading}
               <LoaderCircle size={18} class="animate-spin" />
