@@ -48,7 +48,7 @@ describe("delcom proxy (+server.ts)", () => {
     const response = await call(GET, {
       path: "courses",
       search: "?is_me=1",
-      headers: { authorization: "Bearer abc", cookie: "secret=1" },
+      headers: { authorization: "Bearer abc", cookie: "secret=1", "user-agent": "Mozilla/5.0 Test" },
     });
 
     const [target, options] = fetchSpy.mock.calls[0];
@@ -57,6 +57,7 @@ describe("delcom proxy (+server.ts)", () => {
     expect(options.body).toBeUndefined();
     expect(options.headers.get("authorization")).toBe("Bearer abc");
     expect(options.headers.get("cookie")).toBeNull();
+    expect(options.headers.get("user-agent")).toBe("Mozilla/5.0 Test");
 
     expect(response.status).toBe(200);
     expect(response.headers.get("content-type")).toBe("application/json");
@@ -82,14 +83,56 @@ describe("delcom proxy (+server.ts)", () => {
     expect(response.status).toBe(201);
   });
 
-  it("keeps the upstream status for errors and omits missing content type", async () => {
-    const upstream = new Response(null, { status: 404 });
-    upstream.headers.delete("content-type");
-    fetchSpy.mockResolvedValue(upstream);
+  it("keeps a JSON error response from the upstream as is", async () => {
+    fetchSpy.mockResolvedValue(
+      new Response('{"status":"fail","message":"Tidak ditemukan"}', {
+        status: 404,
+        headers: { "content-type": "application/json" },
+      })
+    );
 
     const response = await call(DELETE, { method: "DELETE", path: "courses/9" });
 
     expect(response.status).toBe(404);
+    expect(await response.json()).toEqual({ status: "fail", message: "Tidak ditemukan" });
+  });
+
+  it("turns an HTML error page from the upstream into a clear JSON message", async () => {
+    fetchSpy.mockResolvedValue(
+      new Response("<html><head><title>403 Forbidden</title></head></html>", {
+        status: 403,
+        headers: { "content-type": "text/html" },
+      })
+    );
+
+    const response = await call(POST, { method: "POST", path: "auth/login", body: "{}" });
+
+    expect(response.status).toBe(403);
+    expect(await response.json()).toEqual({
+      status: "fail",
+      message: "Server API Delcom mengembalikan status 403",
+    });
+  });
+
+  it("handles an upstream error without any content type", async () => {
+    const upstream = new Response(null, { status: 500 });
+    upstream.headers.delete("content-type");
+    fetchSpy.mockResolvedValue(upstream);
+
+    const response = await call(GET, { path: "courses" });
+
+    expect(response.status).toBe(500);
+    expect((await response.json()).message).toContain("500");
+  });
+
+  it("omits the content type of a successful empty response", async () => {
+    const upstream = new Response(null, { status: 204 });
+    upstream.headers.delete("content-type");
+    fetchSpy.mockResolvedValue(upstream);
+
+    const response = await call(GET, { path: "courses" });
+
+    expect(response.status).toBe(204);
     expect(response.headers.get("content-type")).toBeNull();
   });
 

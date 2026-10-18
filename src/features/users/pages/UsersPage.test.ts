@@ -110,4 +110,36 @@ describe("UsersPage", () => {
 
     expect(wrapper.text()).not.toContain("Memuat daftar pengguna...");
   });
+
+  it("should render users progressively and reveal more on demand", async () => {
+    const manyUsers = Array.from({ length: 30 }, (_, i) => ({
+      id: i + 1,
+      name: `User ${i + 1}`,
+      email: `user${i + 1}@delcom.org`,
+      photo: null,
+      created_at: "2024-10-05T02:53:38.000000Z",
+    }));
+    vi.spyOn(usersStore, "asyncSetUsers").mockResolvedValue(undefined as any);
+    const { wrapper } = renderWithProviders(UsersPage, {
+      preloadedState: { users: manyUsers },
+    });
+    const flush = () => new Promise((r) => setTimeout(r, 0));
+    await flush();
+
+    expect(wrapper.text()).toContain("Total: 30 Pengguna");
+    expect(wrapper.find('[data-testid="user-card-12"]').exists()).toBe(true);
+    expect(wrapper.find('[data-testid="user-card-13"]').exists()).toBe(false);
+
+    const button = wrapper.find('[data-testid="show-more-users-btn"]');
+    expect(button.text()).toContain("18 lagi");
+    (button.element as HTMLElement).click();
+    await flush();
+    expect(wrapper.find('[data-testid="user-card-24"]').exists()).toBe(true);
+    expect(wrapper.find('[data-testid="user-card-25"]').exists()).toBe(false);
+
+    (wrapper.find('[data-testid="show-more-users-btn"]').element as HTMLElement).click();
+    await flush();
+    expect(wrapper.find('[data-testid="user-card-30"]').exists()).toBe(true);
+    expect(wrapper.find('[data-testid="show-more-users-btn"]').exists()).toBe(false);
+  });
 });

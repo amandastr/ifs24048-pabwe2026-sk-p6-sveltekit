@@ -5,8 +5,11 @@
   import { Users, Search, Mail, Calendar, LoaderCircle } from "lucide-svelte";
   import type { User } from "../api/userApi";
 
+  const PAGE_SIZE = 12;
+
   let loadingUsers: boolean = false;
   let search: string = "";
+  let visibleCount: number = PAGE_SIZE;
 
   $: users = $usersStore.users || [];
 
@@ -24,6 +27,14 @@
     const emailMatch = u.email ? u.email.toLowerCase().includes(query) : false;
     return nameMatch || emailMatch;
   });
+
+  // Render bertahap agar halaman cepat tampil walau pengguna sangat banyak
+  $: shownUsers = filteredUsers.slice(0, visibleCount);
+  $: remainingUsers = filteredUsers.length - shownUsers.length;
+
+  function showMore() {
+    visibleCount += PAGE_SIZE;
+  }
 </script>
 
 <div class="space-y-6 animate-in fade-in duration-300">
@@ -72,7 +83,7 @@
           <p class="font-medium">Tidak ada data pengguna ditemukan.</p>
         </div>
       {:else}
-        {#each filteredUsers as u (u.id)}
+        {#each shownUsers as u (u.id)}
           <div
             data-testid={`user-card-${u.id}`}
             class="p-5 rounded-2xl border border-slate-200/80 hover:border-indigo-300 hover:shadow-md transition-all bg-white flex flex-col justify-between"
@@ -82,6 +93,10 @@
                 <img
                   src={u.photo}
                   alt={u.name}
+                  width="48"
+                  height="48"
+                  loading="lazy"
+                  decoding="async"
                   class="w-12 h-12 rounded-full object-cover border border-slate-200 shrink-0"
                 />
               {:else}
@@ -110,5 +125,18 @@
         {/each}
       {/if}
     </div>
+
+    {#if remainingUsers > 0}
+      <div class="px-6 pb-6 flex justify-center">
+        <button
+          type="button"
+          data-testid="show-more-users-btn"
+          on:click={showMore}
+          class="px-5 py-2.5 text-sm font-semibold rounded-xl text-indigo-700 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200/60 transition-colors"
+        >
+          {`Tampilkan Lebih Banyak (${remainingUsers} lagi)`}
+        </button>
+      </div>
+    {/if}
   </div>
 </div>

@@ -3,7 +3,22 @@ import type { RequestHandler } from "./$types";
 // Alamat API Delcom asli (diisi saat build dari VITE_DELCOM_BASEURL).
 declare const DELCOM_UPSTREAM: string;
 
-const FORWARDED_REQUEST_HEADERS = ["authorization", "content-type", "accept"];
+const FORWARDED_REQUEST_HEADERS = [
+  "authorization",
+  "content-type",
+  "accept",
+  "accept-language",
+  "user-agent",
+  "origin",
+  "referer",
+];
+
+function failResponse(message: string, status: number): Response {
+  return new Response(JSON.stringify({ status: "fail", message }), {
+    status,
+    headers: { "content-type": "application/json" },
+  });
+}
 
 /**
  * Proxy sisi server: browser memanggil /api/delcom/*, server meneruskan
@@ -28,8 +43,17 @@ const proxy: RequestHandler = async ({ request, params, url }) => {
       body: hasBody ? await request.arrayBuffer() : undefined,
     });
 
-    const responseHeaders = new Headers();
     const contentType = upstream.headers.get("content-type");
+
+    // Error berbentuk HTML (bukan JSON) diubah menjadi pesan yang jelas.
+    if (!upstream.ok && !(contentType || "").includes("json")) {
+      return failResponse(
+        `Server API Delcom mengembalikan status ${upstream.status}`,
+        upstream.status
+      );
+    }
+
+    const responseHeaders = new Headers();
     if (contentType) responseHeaders.set("content-type", contentType);
 
     return new Response(upstream.body, {
@@ -37,10 +61,7 @@ const proxy: RequestHandler = async ({ request, params, url }) => {
       headers: responseHeaders,
     });
   } catch {
-    return new Response(
-      JSON.stringify({ status: "fail", message: "Gagal menghubungi server API" }),
-      { status: 502, headers: { "content-type": "application/json" } }
-    );
+    return failResponse("Gagal menghubungi server API", 502);
   }
 };
 
